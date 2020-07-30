@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 COPY elasticsearch-7.7.0 /home/elasticsearch
-COPY jdk-14 /usr/java/
+COPY jdk-14 /usr/java/jdk-14
 
 RUN mkdir -p /usr/java && \
 echo '\n\
