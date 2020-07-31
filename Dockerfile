@@ -1,12 +1,10 @@
-FROM gradle:6.4.1-jdk14
+FROM gradle:5.6.4-jdk12
 
-COPY elasticsearch-7.7.0 /usr/elasticsearch
-
-RUN cd /usr/elasticsearch && chmod +x ./gradlew && ./gradlew assemble && \
-useradd -ms /bin/bash elasticsearch
-
+COPY . /usr/elasticsearch
+RUN chmod -R 777 /usr/elasticsearch && useradd -ms /bin/bash elasticsearch
 USER elasticsearch
 
 WORKDIR /usr/elasticsearch/bin
+EXPOSE 9200 9300
 
-# CMD [ "./elasticsearch" ]
+CMD [ "./elasticsearch" ]
