@@ -1,4 +1,4 @@
-FROM gradle:5.6.4-jdk12
+FROM gradle:6.4-jdk14
 
 COPY . /tmp/elasticsearch-7.5.1
 RUN groupadd elsearch && \
