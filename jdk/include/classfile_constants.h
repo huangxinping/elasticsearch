@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 /* Classfile version number for this information */
-#define JVM_CLASSFILE_MAJOR_VERSION 57
+#define JVM_CLASSFILE_MAJOR_VERSION 58
 #define JVM_CLASSFILE_MINOR_VERSION 0
 
 /* Flags */
@@ -144,6 +144,10 @@ enum {
 /* Type signatures */
 
 enum {
+    JVM_SIGNATURE_SLASH         = '/',
+    JVM_SIGNATURE_DOT           = '.',
+    JVM_SIGNATURE_SPECIAL       = '<',
+    JVM_SIGNATURE_ENDSPECIAL    = '>',
     JVM_SIGNATURE_ARRAY         = '[',
     JVM_SIGNATURE_BYTE          = 'B',
     JVM_SIGNATURE_CHAR          = 'C',
