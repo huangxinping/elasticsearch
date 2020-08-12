@@ -13,9 +13,12 @@ RUN groupadd elsearch && \
     useradd -ms /bin/bash elsearch -g elsearch -p /tmp/elasticsearch-7.5.1 && \
     chown -R elsearch:elsearch /tmp/elasticsearch-7.5.1 && \
     mv /tmp/elasticsearch-7.5.1 /home/elsearch && \
+    cd /home/elsearch/elasticsearch-7.5.1 && \
     git remote -v && \
     git remote set-url origin https://github.com/huangxinping/elasticsearch.git && \ 
-    cd /home/elsearch/elasticsearch-7.5.1 && git lfs install && git lfs pull origin v7.5.1 && sysctl -w vm.max_map_count=262144
+    git lfs install && \
+    git lfs pull origin v7.5.1 && \
+    sysctl -w vm.max_map_count=262144
 USER elsearch
 
 WORKDIR /home/elsearch/elasticsearch-7.5.1/bin
