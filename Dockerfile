@@ -1,6 +1,6 @@
 FROM gradle:5.6.2-jdk12
 
-COPY . /tmp/elasticsearch-7.5.1
+COPY . /tmp/elasticsearch
 
 RUN build_deps="curl" && \
     apt-get update && \
@@ -10,18 +10,16 @@ RUN build_deps="curl" && \
     DEBIAN_FRONTEND=noninteractive apt-get purge -y --auto-remove ${build_deps} && \
     rm -r /var/lib/apt/lists/*
 RUN groupadd elsearch && \
-    useradd -ms /bin/bash elsearch -g elsearch -p /tmp/elasticsearch-7.5.1 && \
-    chown -R elsearch:elsearch /tmp/elasticsearch-7.5.1 && \
-    mv /tmp/elasticsearch-7.5.1 /home/elsearch && \
-    cd /home/elsearch/elasticsearch-7.5.1 && \
-    git remote -v && \
+    useradd -ms /bin/bash elsearch -g elsearch -p /tmp/elasticsearch && \
+    chown -R elsearch:elsearch /tmp/elasticsearch && \
+    mv /tmp/elasticsearch /home/elsearch && \
+    cd /home/elsearch/elasticsearch && \
     git remote set-url origin https://github.com/huangxinping/elasticsearch.git && \ 
     git lfs install && \
-    git lfs pull origin v7.5.1 && \
-    sysctl -w vm.max_map_count=262144
+    git lfs pull
 USER elsearch
 
-WORKDIR /home/elsearch/elasticsearch-7.5.1/bin
+WORKDIR /home/elsearch/elasticsearch/bin
 EXPOSE 9200 9300
 
 CMD [ "./elasticsearch" ]
