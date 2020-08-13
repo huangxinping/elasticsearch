@@ -1,11 +1,8 @@
 FROM alpine/git AS builder
 COPY . /tmp/elasticsearch
 WORKDIR /tmp/elasticsearch   
-RUN rm /etc/apk/repositories && echo http://mirrors.aliyun.com/alpine/v3.9/main > /etc/apk/repositories && \
-    echo http://mirrors.aliyun.com/alpine/v3.9/community >> /etc/apk/repositories && \
-    apk --no-cache add git-lfs && \
+RUN apk --no-cache add git-lfs && \
     git remote set-url origin https://github.com/huangxinping/elasticsearch.git && \
-    git remote get-url --all origin && \
     git lfs install && \
     git lfs pull && \
     find . -name ".DS_Store" -print -delete && \
