@@ -2,6 +2,7 @@ FROM alpine/git AS builder
 COPY . /tmp/elasticsearch
 WORKDIR /tmp/elasticsearch   
 RUN apk --no-cache add git-lfs && \
+    git remote set-url origin https://github.com/huangxinping/elasticsearch.git && \
     git lfs install && \
     git lfs pull && \
     find . -name ".DS_Store" -print -delete && \
